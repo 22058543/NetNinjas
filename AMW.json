@@ -1,9 +1,18 @@
 {
   "application": {
-    "name": "A Moment With Dashboard",
+    "name": "A Moment With",
+    "version": "1.0.0",
+    "currentView": "dashboard",
     "user": {
-      "name": "User",
-      "avatar": "profile_image.jpg"
+      "id": "user_001",
+      "name": "Caroline",
+      "avatar": "profile_image.jpg",
+      "email": "caroline@example.com",
+      "preferences": {
+        "theme": "default",
+        "notifications": true,
+        "autoSave": true
+      }
     },
     "navigation": {
       "items": [
@@ -11,183 +20,507 @@
           "id": "dashboard",
           "label": "Dashboard",
           "active": true,
+          "route": "/dashboard",
           "icon": "dashboard"
         },
         {
           "id": "stories",
           "label": "Stories",
           "active": false,
-          "icon": "stories"
+          "route": "/stories",
+          "icon": "book"
         },
         {
           "id": "upload",
           "label": "Upload Media",
           "active": false,
+          "route": "/upload",
           "icon": "upload"
         },
         {
           "id": "chapters",
           "label": "Chapters",
           "active": false,
-          "icon": "chapters"
+          "route": "/chapters",
+          "icon": "list"
         },
         {
           "id": "settings",
           "label": "Settings",
           "active": false,
-          "icon": "settings"
+          "route": "/settings",
+          "icon": "gear"
         }
       ]
     },
     "header": {
+      "title": "A Moment With Dashboard",
       "actions": [
         {
           "id": "search",
           "label": "Search",
-          "type": "button"
+          "type": "button",
+          "icon": "search",
+          "shortcut": "Ctrl+K"
         },
         {
           "id": "upload",
           "label": "Upload",
-          "type": "button"
+          "type": "button",
+          "icon": "upload",
+          "route": "/upload"
         },
         {
           "id": "notifications",
           "label": "Notifications",
-          "type": "button"
+          "type": "button",
+          "icon": "bell",
+          "badge": 3
         }
       ]
     },
-    "dashboard": {
-      "title": "A Moment with",
-      "subtitle": "All stories, Sort: Recent",
-      "sortOptions": ["Recent", "Oldest", "Most Moments", "Alphabetical"],
-      "addStoryButton": {
-        "label": "Add Story",
-        "action": "create_new_story"
+    "views": {
+      "dashboard": {
+        "title": "A Moment with",
+        "subtitle": "All stories, Sort: Recent",
+        "sortOptions": [
+          {
+            "value": "recent",
+            "label": "Recent",
+            "active": true
+          },
+          {
+            "value": "oldest",
+            "label": "Oldest",
+            "active": false
+          },
+          {
+            "value": "most_moments",
+            "label": "Most Moments",
+            "active": false
+          },
+          {
+            "value": "alphabetical",
+            "label": "Alphabetical",
+            "active": false
+          }
+        ],
+        "addStoryButton": {
+          "label": "Add Story",
+          "action": "create_story",
+          "route": "/stories/new"
+        },
+        "stories": [
+          {
+            "id": "story_001",
+            "title": "Pablo's Birthday",
+            "chapters": 2,
+            "moments": 20,
+            "thumbnail": "pablo_birthday_thumb.jpg",
+            "createdAt": "2025-09-01T10:00:00Z",
+            "updatedAt": "2025-09-08T15:30:00Z",
+            "status": "published",
+            "actions": [
+              {
+                "type": "view",
+                "label": "View",
+                "primary": true,
+                "route": "/stories/story_001/view"
+              },
+              {
+                "type": "edit",
+                "label": "Edit",
+                "primary": false,
+                "route": "/stories/story_001/edit"
+              }
+            ]
+          },
+          {
+            "id": "story_002",
+            "title": "Zoo Trip",
+            "chapters": 3,
+            "moments": 11,
+            "thumbnail": "zoo_trip_thumb.jpg",
+            "createdAt": "2025-08-25T14:00:00Z",
+            "updatedAt": "2025-09-07T09:15:00Z",
+            "status": "published",
+            "actions": [
+              {
+                "type": "view",
+                "label": "View",
+                "primary": true,
+                "route": "/stories/story_002/view"
+              },
+              {
+                "type": "edit",
+                "label": "Edit",
+                "primary": false,
+                "route": "/stories/story_002/edit"
+              }
+            ]
+          },
+          {
+            "id": "story_003",
+            "title": "Leo and Mia",
+            "chapters": 4,
+            "moments": 24,
+            "thumbnail": "leo_mia_thumb.jpg",
+            "createdAt": "2025-08-20T16:00:00Z",
+            "updatedAt": "2025-09-06T11:45:00Z",
+            "status": "published",
+            "actions": [
+              {
+                "type": "view",
+                "label": "View",
+                "primary": true,
+                "route": "/stories/story_003/view"
+              },
+              {
+                "type": "edit",
+                "label": "Edit",
+                "primary": false,
+                "route": "/stories/story_003/edit"
+              }
+            ]
+          },
+          {
+            "id": "story_004",
+            "title": "Family Vacation",
+            "chapters": 5,
+            "moments": 35,
+            "thumbnail": "family_vacation_thumb.jpg",
+            "createdAt": "2025-08-15T12:00:00Z",
+            "updatedAt": "2025-09-05T14:20:00Z",
+            "status": "published",
+            "actions": [
+              {
+                "type": "view",
+                "label": "View",
+                "primary": true,
+                "route": "/stories/story_004/view"
+              },
+              {
+                "type": "edit",
+                "label": "Edit",
+                "primary": false,
+                "route": "/stories/story_004/edit"
+              }
+            ]
+          },
+          {
+            "id": "story_005",
+            "title": "My Travel Adventures",
+            "chapters": 8,
+            "moments": 42,
+            "thumbnail": "travel_adventures_thumb.jpg",
+            "createdAt": "2025-08-10T08:00:00Z",
+            "updatedAt": "2025-09-04T16:00:00Z",
+            "status": "published",
+            "actions": [
+              {
+                "type": "view",
+                "label": "View",
+                "primary": true,
+                "route": "/stories/story_005/view"
+              },
+              {
+                "type": "edit",
+                "label": "Edit",
+                "primary": false,
+                "route": "/stories/story_005/edit"
+              }
+            ]
+          },
+          {
+            "id": "story_006",
+            "title": "Musical Festival Weekend",
+            "chapters": 3,
+            "moments": 28,
+            "thumbnail": "festival_thumb.jpg",
+            "createdAt": "2025-08-05T20:00:00Z",
+            "updatedAt": "2025-09-03T13:30:00Z",
+            "status": "published",
+            "actions": [
+              {
+                "type": "view",
+                "label": "View",
+                "primary": true,
+                "route": "/stories/story_006/view"
+              },
+              {
+                "type": "edit",
+                "label": "Edit",
+                "primary": false,
+                "route": "/stories/story_006/edit"
+              }
+            ]
+          }
+        ]
       },
-      "stories": [
-        {
-          "id": "story_1",
-          "title": "Joey's Birthday",
-          "chapters": 2,
-          "moments": 20,
-          "thumbnail": "placeholder_image.jpg",
-          "actions": [
-            {
-              "type": "view",
-              "label": "View",
-              "primary": true
-            },
-            {
-              "type": "edit",
-              "label": "Edit",
-              "primary": false
-            }
-          ]
+      "storyEditor": {
+        "title": "Story Editor",
+        "storyId": null,
+        "isNewStory": true,
+        "lastSaved": null,
+        "saveButton": {
+          "label": "Save",
+          "enabled": true,
+          "action": "save_story",
+          "shortcut": "Ctrl+S"
         },
-        {
-          "id": "story_2",
-          "title": "Zoo Trip 2023",
-          "chapters": 3,
-          "moments": 11,
-          "thumbnail": "placeholder_image.jpg",
-          "actions": [
-            {
-              "type": "view",
-              "label": "View",
-              "primary": true
-            },
-            {
-              "type": "edit",
-              "label": "Edit",
-              "primary": false
+        "form": {
+          "title": {
+            "label": "Title",
+            "type": "text",
+            "placeholder": "Enter story title...",
+            "value": "",
+            "required": true,
+            "maxLength": 100,
+            "validation": {
+              "required": true,
+              "minLength": 1,
+              "message": "Title is required"
             }
-          ]
+          },
+          "chapterSelect": {
+            "label": "Choose Chapter",
+            "type": "dropdown",
+            "placeholder": "Select a chapter...",
+            "value": null,
+            "options": [
+              {
+                "id": "chapter_1",
+                "label": "Chapter 1",
+                "value": "chapter_1",
+                "momentCount": 0
+              },
+              {
+                "id": "chapter_2",
+                "label": "Chapter 2",
+                "value": "chapter_2",
+                "momentCount": 0
+              },
+              {
+                "id": "chapter_3",
+                "label": "Chapter 3",
+                "value": "chapter_3",
+                "momentCount": 0
+              },
+              {
+                "id": "chapter_4",
+                "label": "Chapter 4",
+                "value": "chapter_4",
+                "momentCount": 0
+              }
+            ]
+          },
+          "details": {
+            "label": "Details",
+            "type": "textarea",
+            "placeholder": "Write your story here...",
+            "value": "",
+            "rows": 10,
+            "maxLength": 5000,
+            "validation": {
+              "maxLength": 5000,
+              "message": "Story details cannot exceed 5000 characters"
+            }
+          },
+          "shareStory": {
+            "label": "Share Story",
+            "type": "toggle",
+            "value": true,
+            "description": "Allow others to view this story"
+          }
         },
-        {
-          "id": "story_3",
-          "title": "Leo and Mia",
-          "chapters": 4,
-          "moments": 24,
-          "thumbnail": "placeholder_image.jpg",
-          "actions": [
+        "chapters": {
+          "title": "Chapters",
+          "items": [
             {
-              "type": "view",
-              "label": "View",
-              "primary": true
+              "id": "chapter_1",
+              "name": "Chapter 1",
+              "selected": false,
+              "momentCount": 0,
+              "createdAt": "2025-09-09T10:00:00Z",
+              "status": "empty"
             },
             {
-              "type": "edit",
-              "label": "Edit",
-              "primary": false
+              "id": "chapter_2",
+              "name": "Chapter 2",
+              "selected": false,
+              "momentCount": 0,
+              "createdAt": "2025-09-09T10:05:00Z",
+              "status": "empty"
+            },
+            {
+              "id": "chapter_3",
+              "name": "Chapter 3",
+              "selected": false,
+              "momentCount": 0,
+              "createdAt": "2025-09-09T10:10:00Z",
+              "status": "empty"
+            },
+            {
+              "id": "chapter_4",
+              "name": "Chapter 4",
+              "selected": false,
+              "momentCount": 0,
+              "createdAt": "2025-09-09T10:15:00Z",
+              "status": "empty"
             }
-          ]
+          ],
+          "createButton": {
+            "label": "+ Create New Chapter",
+            "action": "create_chapter",
+            "enabled": true
+          }
         },
-        {
-          "id": "story_4",
-          "title": "Malaysia 2023",
-          "chapters": 5,
-          "moments": 35,
-          "thumbnail": "placeholder_image.jpg",
-          "actions": [
+        "moments": {
+          "title": "Moments",
+          "grid": {
+            "columns": 2,
+            "gap": "16px"
+          },
+          "items": [
             {
-              "type": "view",
-              "label": "View",
-              "primary": true
+              "id": "moment_placeholder_1",
+              "type": "upload_placeholder",
+              "status": "empty",
+              "mediaType": null,
+              "thumbnail": null,
+              "uploadDate": null,
+              "description": "",
+              "chapterId": null
             },
             {
-              "type": "edit",
-              "label": "Edit",
-              "primary": false
-            }
-          ]
-        },
-        {
-          "id": "story_5",
-          "title": "Family Reunion",
-          "chapters": 8,
-          "moments": 42,
-          "thumbnail": "placeholder_image.jpg",
-          "actions": [
-            {
-              "type": "view",
-              "label": "View",
-              "primary": true
+              "id": "moment_placeholder_2",
+              "type": "upload_placeholder",
+              "status": "empty",
+              "mediaType": null,
+              "thumbnail": null,
+              "uploadDate": null,
+              "description": "",
+              "chapterId": null
             },
             {
-              "type": "edit",
-              "label": "Edit",
-              "primary": false
-            }
-          ]
-        },
-        {
-          "id": "story_6",
-          "title": "Christmas 2023",
-          "chapters": 3,
-          "moments": 28,
-          "thumbnail": "placeholder_image.jpg",
-          "actions": [
-            {
-              "type": "view",
-              "label": "View",
-              "primary": true
+              "id": "moment_placeholder_3",
+              "type": "upload_placeholder",
+              "status": "empty",
+              "mediaType": null,
+              "thumbnail": null,
+              "uploadDate": null,
+              "description": "",
+              "chapterId": null
             },
             {
-              "type": "edit",
-              "label": "Edit",
-              "primary": false
+              "id": "moment_placeholder_4",
+              "type": "upload_placeholder",
+              "status": "empty",
+              "mediaType": null,
+              "thumbnail": null,
+              "uploadDate": null,
+              "description": "",
+              "chapterId": null
             }
-          ]
+          ],
+          "addButton": {
+            "label": "+ Add New Moment",
+            "action": "add_moment",
+            "enabled": true,
+            "route": "/upload"
+          }
         }
-      ]
+      },
+      "mediaUpload": {
+        "title": "Upload Media",
+        "dropZone": {
+          "text": "Drag & Drop files here",
+          "active": false,
+          "acceptedFormats": [
+            "image/jpeg",
+            "image/png",
+            "image/gif",
+            "video/mp4",
+            "video/mov",
+            "audio/mp3",
+            "audio/wav"
+          ],
+          "maxFileSize": "50MB",
+          "maxFiles": 10
+        },
+        "browseButton": {
+          "label": "Browse",
+          "action": "open_file_picker",
+          "enabled": true
+        },
+        "uploadQueue": {
+          "title": "Upload Queue",
+          "items": [
+            {
+              "id": "upload_001",
+              "filename": "IMG_1234.jpg",
+              "fileSize": "2.4MB",
+              "fileType": "image/jpeg",
+              "status": "uploading",
+              "progress": 75,
+              "uploadStarted": "2025-09-09T14:30:00Z",
+              "estimatedTimeRemaining": "15s",
+              "thumbnail": null,
+              "error": null
+            },
+            {
+              "id": "upload_002",
+              "filename": "VoiceMemo.mp4",
+              "fileSize": "12.8MB",
+              "fileType": "video/mp4",
+              "status": "uploading",
+              "progress": 45,
+              "uploadStarted": "2025-09-09T14:28:00Z",
+              "estimatedTimeRemaining": "45s",
+              "thumbnail": null,
+              "error": null
+            },
+            {
+              "id": "upload_003",
+              "filename": "FamilyHoliday.mov",
+              "fileSize": "24.6MB",
+              "fileType": "video/mov",
+              "status": "pending",
+              "progress": 0,
+              "uploadStarted": null,
+              "estimatedTimeRemaining": null,
+              "thumbnail": null,
+              "error": null
+            }
+          ],
+          "totalFiles": 3,
+          "completedFiles": 0,
+          "failedFiles": 0,
+          "totalSize": "39.8MB"
+        },
+        "settings": {
+          "autoAddToStory": false,
+          "defaultChapter": null,
+          "generateThumbnails": true,
+          "compressLargeFiles": true,
+          "notifyOnComplete": true
+        }
+      }
     },
     "chatWidget": {
       "title": "Hi, how can I help you?",
       "placeholder": "Type here......",
       "position": "bottom-left",
-      "status": "Synced"
+      "status": "Synced",
+      "visible": true,
+      "minimized": false,
+      "messages": [],
+      "suggestions": [
+        "How do I create a new story?",
+        "Upload multiple photos",
+        "Organize my chapters",
+        "Share my story"
+      ]
     },
     "theme": {
       "primary": "#8B5CF6",
@@ -195,19 +528,106 @@
       "background": "#F3E8FF",
       "sidebar": "#7C3AED",
       "text": "#1F2937",
-      "accent": "#EC4899"
+      "accent": "#EC4899",
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "error": "#EF4444",
+      "neutral": "#6B7280"
     },
     "layout": {
       "sidebar": {
         "width": "240px",
-        "position": "left"
+        "position": "left",
+        "collapsible": true,
+        "collapsed": false
       },
       "main": {
         "padding": "24px",
+        "maxWidth": "1200px",
         "grid": {
-          "columns": 3,
-          "gap": "24px"
+          "dashboard": {
+            "columns": 3,
+            "gap": "24px",
+            "responsive": {
+              "tablet": 2,
+              "mobile": 1
+            }
+          },
+          "storyEditor": {
+            "areas": [
+              "editor-header editor-header",
+              "editor-form chapters-panel",
+              "editor-form moments-panel"
+            ],
+            "columns": "1fr 400px",
+            "rows": "auto 1fr auto",
+            "gap": "24px"
+          }
         }
+      },
+      "header": {
+        "height": "64px",
+        "padding": "0 24px"
+      }
+    },
+    "api": {
+      "baseUrl": "https://api.amomentwith.com/v1",
+      "endpoints": {
+        "stories": "/stories",
+        "chapters": "/chapters",
+        "moments": "/moments",
+        "upload": "/upload",
+        "user": "/user"
+      },
+      "methods": {
+        "getStories": "GET /stories",
+        "createStory": "POST /stories",
+        "updateStory": "PUT /stories/{id}",
+        "deleteStory": "DELETE /stories/{id}",
+        "uploadMedia": "POST /upload",
+        "createChapter": "POST /chapters",
+        "addMoment": "POST /moments"
+      }
+    },
+    "validation": {
+      "rules": {
+        "storyTitle": {
+          "required": true,
+          "minLength": 1,
+          "maxLength": 100,
+          "message": "Title is required and must be between 1-100 characters"
+        },
+        "chapterName": {
+          "required": true,
+          "minLength": 1,
+          "maxLength": 50,
+          "message": "Chapter name is required and must be between 1-50 characters"
+        },
+        "fileUpload": {
+          "maxSize": 52428800,
+          "allowedTypes": ["image/*", "video/*", "audio/*"],
+          "maxFiles": 10,
+          "message": "File must be under 50MB and of supported format"
+        }
+      }
+    },
+    "notifications": {
+      "autosave": {
+        "enabled": true,
+        "interval": 30000,
+        "message": "Story auto-saved"
+      },
+      "uploadProgress": {
+        "enabled": true,
+        "showPercentage": true
+      },
+      "uploadComplete": {
+        "enabled": true,
+        "showPreview": true
+      },
+      "errors": {
+        "enabled": true,
+        "duration": 5000
       }
     }
   }
