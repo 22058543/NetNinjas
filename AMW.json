@@ -1,0 +1,214 @@
+{
+  "application": {
+    "name": "A Moment With Dashboard",
+    "user": {
+      "name": "User",
+      "avatar": "profile_image.jpg"
+    },
+    "navigation": {
+      "items": [
+        {
+          "id": "dashboard",
+          "label": "Dashboard",
+          "active": true,
+          "icon": "dashboard"
+        },
+        {
+          "id": "stories",
+          "label": "Stories",
+          "active": false,
+          "icon": "stories"
+        },
+        {
+          "id": "upload",
+          "label": "Upload Media",
+          "active": false,
+          "icon": "upload"
+        },
+        {
+          "id": "chapters",
+          "label": "Chapters",
+          "active": false,
+          "icon": "chapters"
+        },
+        {
+          "id": "settings",
+          "label": "Settings",
+          "active": false,
+          "icon": "settings"
+        }
+      ]
+    },
+    "header": {
+      "actions": [
+        {
+          "id": "search",
+          "label": "Search",
+          "type": "button"
+        },
+        {
+          "id": "upload",
+          "label": "Upload",
+          "type": "button"
+        },
+        {
+          "id": "notifications",
+          "label": "Notifications",
+          "type": "button"
+        }
+      ]
+    },
+    "dashboard": {
+      "title": "A Moment with",
+      "subtitle": "All stories, Sort: Recent",
+      "sortOptions": ["Recent", "Oldest", "Most Moments", "Alphabetical"],
+      "addStoryButton": {
+        "label": "Add Story",
+        "action": "create_new_story"
+      },
+      "stories": [
+        {
+          "id": "story_1",
+          "title": "Joey's Birthday",
+          "chapters": 2,
+          "moments": 20,
+          "thumbnail": "placeholder_image.jpg",
+          "actions": [
+            {
+              "type": "view",
+              "label": "View",
+              "primary": true
+            },
+            {
+              "type": "edit",
+              "label": "Edit",
+              "primary": false
+            }
+          ]
+        },
+        {
+          "id": "story_2",
+          "title": "Zoo Trip 2023",
+          "chapters": 3,
+          "moments": 11,
+          "thumbnail": "placeholder_image.jpg",
+          "actions": [
+            {
+              "type": "view",
+              "label": "View",
+              "primary": true
+            },
+            {
+              "type": "edit",
+              "label": "Edit",
+              "primary": false
+            }
+          ]
+        },
+        {
+          "id": "story_3",
+          "title": "Leo and Mia",
+          "chapters": 4,
+          "moments": 24,
+          "thumbnail": "placeholder_image.jpg",
+          "actions": [
+            {
+              "type": "view",
+              "label": "View",
+              "primary": true
+            },
+            {
+              "type": "edit",
+              "label": "Edit",
+              "primary": false
+            }
+          ]
+        },
+        {
+          "id": "story_4",
+          "title": "Malaysia 2023",
+          "chapters": 5,
+          "moments": 35,
+          "thumbnail": "placeholder_image.jpg",
+          "actions": [
+            {
+              "type": "view",
+              "label": "View",
+              "primary": true
+            },
+            {
+              "type": "edit",
+              "label": "Edit",
+              "primary": false
+            }
+          ]
+        },
+        {
+          "id": "story_5",
+          "title": "Family Reunion",
+          "chapters": 8,
+          "moments": 42,
+          "thumbnail": "placeholder_image.jpg",
+          "actions": [
+            {
+              "type": "view",
+              "label": "View",
+              "primary": true
+            },
+            {
+              "type": "edit",
+              "label": "Edit",
+              "primary": false
+            }
+          ]
+        },
+        {
+          "id": "story_6",
+          "title": "Christmas 2023",
+          "chapters": 3,
+          "moments": 28,
+          "thumbnail": "placeholder_image.jpg",
+          "actions": [
+            {
+              "type": "view",
+              "label": "View",
+              "primary": true
+            },
+            {
+              "type": "edit",
+              "label": "Edit",
+              "primary": false
+            }
+          ]
+        }
+      ]
+    },
+    "chatWidget": {
+      "title": "Hi, how can I help you?",
+      "placeholder": "Type here......",
+      "position": "bottom-left",
+      "status": "Synced"
+    },
+    "theme": {
+      "primary": "#8B5CF6",
+      "secondary": "#A855F7",
+      "background": "#F3E8FF",
+      "sidebar": "#7C3AED",
+      "text": "#1F2937",
+      "accent": "#EC4899"
+    },
+    "layout": {
+      "sidebar": {
+        "width": "240px",
+        "position": "left"
+      },
+      "main": {
+        "padding": "24px",
+        "grid": {
+          "columns": 3,
+          "gap": "24px"
+        }
+      }
+    }
+  }
+}
