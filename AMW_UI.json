@@ -1,0 +1,187 @@
+{
+    "application": {
+        "name": "AMW",
+        "version": "1.0.0",
+        "environment": "production",
+        "currentView": "dashboard"
+    },
+    "user": {
+        "id": "user_001",
+        "cognitoId": "cognito_user_001",
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "avatar": "profile_image.jpg",
+        "role": "user",
+        "preferences": {
+            "theme": "default",
+            "notifications": true,
+            "autosave": true
+        },
+        "createdAt": "2024-10-01T12:00:00Z",
+        "lastLogin": "2024-10-01T12:00:00Z"
+    },
+    "stories": [
+        {
+            "id": "story_001",
+            "title": "My first story",
+            "description": "Trial test for stories.",
+            "status": "draft",
+            "visibility": "private",
+            "thumbnail": "image1.jpg",
+            "chapterCount": 1,
+            "momentCount": 3,
+            "authorId": "user_001",
+            "createdAt": "2024-10-01T12:00:00Z",
+            "updatedAt": "2024-10-01T12:00:00Z",
+            "publishedAt": "2024-10-01T12:00:00Z",
+            "tags": ["home", "pyjamas"]
+        },
+        {
+            "id": "story_002",
+            "title": "Joey's Birthday",
+            "description": "Joey's birthday celebration.",
+            "status": "published",
+            "visibility": "public",
+            "thumbnail": "joey1.jpg",
+            "chapterCount": 3,
+            "momentCount": 13,
+            "authorId": "user_001",
+            "createdAt": "2024-10-01T12:00:00Z",
+            "updatedAt": "2024-10-01T12:00:00Z",
+            "publishedAt": "2024-10-01T12:00:00Z",
+            "tags": ["friends", "party", "fun"]
+        },
+        {
+            "id": "story_003",
+            "title": "Beach Day",
+            "description": "Beach day with family.",
+            "status": "archived",
+            "visibility": "shared",
+            "thumbnail": "beach1.jpg",
+            "chapterCount": 2,
+            "momentCount": 8,
+            "authorId": "user_001",
+            "createdAt": "2024-10-01T12:00:00Z",
+            "updatedAt": "2024-10-01T12:00:00Z",
+            "publishedAt": "2024-10-01T12:00:00Z",
+            "tags": ["family", "sun", "sand"]
+        }
+    ],
+    "chapters": [
+        {
+            "id": "chapter_001",
+            "storyId": "story_001",
+            "title": "Pilot",
+            "description": "Trial test for stories.",
+            "status": "published",
+            "order": 1,
+            "createdAt": "2024-10-01T12:00:00Z",
+            "updatedAt": "2024-10-01T12:00:00Z"
+        },
+        {
+            "id": "chapter_002",
+            "storyId": "story_002",
+            "title": "Preparation",
+            "description": "Getting ready for the party.",
+            "status": "published",
+            "order": 1,
+            "createdAt": "2024-10-01T12:00:00Z",
+            "updatedAt": "2024-10-01T12:00:00Z"
+        },
+        {
+            "id": "chapter_003",
+            "storyId": "story_002",
+            "title": "The Party",
+            "description": "Celebrating Joey's birthday.",
+            "status": "published",
+            "order": 2,
+            "createdAt": "2024-10-01T12:00:00Z",
+            "updatedAt": "2024-10-01T12:00:00Z"
+        },
+        {
+            "id": "chapter_004",
+            "storyId": "story_002",
+            "title": "Aftermath",
+            "description": "Post-party fun.",
+            "status": "published",
+            "order": 3,
+            "createdAt": "2024-10-01T12:00:00Z",
+            "updatedAt": "2024-10-01T12:00:00Z"
+        },
+        {
+            "id": "chapter_005",
+            "storyId": "story_003",
+            "title": "Arrival",
+            "description": "Arriving at the beach.",
+            "status": "published",
+            "order": 1,
+            "createdAt": "2024-10-01T12:00:00Z",
+            "updatedAt": "2024-10-01T12:00:00Z"
+        },
+        {
+            "id": "chapter_006",
+            "storyId": "story_003",
+            "title": "Fun in the Sun",
+            "description": "Enjoying the beach activities.",
+            "status": "published",
+            "order": 2,
+            "createdAt": "2024-10-01T12:00:00Z",
+            "updatedAt": "2024-10-01T12:00:00Z"
+        }
+    ],
+    "moments": [
+        {
+            "id": "moment_001",
+            "chapterId": "chapter_001",
+            "storyId": "story_001",
+            "type": "text",
+            "description": "Relaxing at home in my pyjamas!",
+            "content": "Woke up like this!",
+            "createdAt": "2024-10-01T12:00:00Z",
+            "updatedAt": "2024-10-01T12:00:00Z",
+            "media": {
+                "url": "image1.jpg",
+                "thumbnail": "thumb_image1.jpg",
+                "fileName": "image1.jpg",
+                "fileSize": 204800
+            },
+            "attribution": "Photo by John Doe"
+        },
+        {
+            "id": "moment_002",
+            "chapterId": "chapter_002",
+            "storyId": "story_002",
+            "type": "image",
+            "title": "Joey's Cake",
+            "description": "The cake is ready!",
+            "content": "",
+            "createdAt": "2024-10-01T12:00:00Z",
+            "updatedAt": "2024-10-01T12:00:00Z",
+            "media": {
+                "url": "joey_cake.jpg",
+                "thumbnail": "thumb_joey_cake.jpg",
+                "fileName": "joey_cake.jpg",
+                "fileSize": 307200
+            },
+            "attribution": null
+        },
+        {
+            "id": "moment_003",
+            "chapterId": "chapter_003",
+            "storyId": "story_002",
+            "type": "video",
+            "title": "Birthday Song",
+            "description": null,
+            "content": "",
+            "createdAt": "2024-10-01T12:00:00Z",
+            "updatedAt": "2024-10-01T12:00:00Z",
+            "media": {
+                "url": "birthday_song.mp4",
+                "thumbnail": "thumb_birthday_song.jpg",
+                "fileName": "birthday_song.mp4",
+                "fileSize": 5120000
+            },
+            "attribution": null
+        }
+    ]
+    }
