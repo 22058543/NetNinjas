@@ -1,98 +1,98 @@
- "$schema": "http://json-schema.org/draft-07/schema#",
- "title": "AMW Schema",
- "description": "Schema for AMW data structure",
- "type": "object",
- "properties": { 
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AMW Schema",
+  "description": "Schema for AMW data structure",
+  "type": "object",
+  "properties": {
     "application": {
       "type": "object",
       "description": "Root",
       "properties": {
-        "name" : {
-            "type": "string",
-            "const": "AMW",
-            "description": "Application name"
+        "name": {
+          "type": "string",
+          "const": "AMW",
+          "description": "Application name"
         },
         "version": {
-            "type": "string",
-            "description": "Application version",
+          "type": "string",
+          "description": "Application version"
         },
         "environment": {
-            "type": "string",
-            "description": "Deployment environment",
-            "enum": ["development", "staging", "production"]
+          "type": "string",
+          "description": "Deployment environment",
+          "enum": ["development", "staging", "production"]
         },
         "currentView": {
-            "type": "string",
-            "description": "Current view in the application",
-            "enum": ["dashboard", "story_editor", "media_upload", "settings", "chapters"]
+          "type": "string",
+          "description": "Current view in the application",
+          "enum": ["dashboard", "story_editor", "media_upload", "settings", "chapters"]
         }
       },
-        "required": ["name", "version", "environment", "currentView"]
+      "required": ["name", "version", "environment", "currentView"]
     },
     "user": {
       "type": "object",
       "description": "User profile",
       "properties": {
         "id": {
-            "type": "string",
-            "description": "Unique user identifier from Cognito"
+          "type": "string",
+          "description": "Unique user identifier from Cognito"
         },
         "cognitoId": {
-            "type": "string",
-            "description": "Cognito user ID"
+          "type": "string",
+          "description": "Cognito user ID"
         },
         "name": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 100,
-            "description": "User's full name"
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "User's full name"
         },
         "email": {
-            "type": "string",
-            "format": "email",
-            "description": "User's email address"
+          "type": "string",
+          "format": "email",
+          "description": "User's email address"
         },
         "avatar": {
-            "type": ["string", "null"],
-            "format": "uri",
-            "description": "URL to user's avatar image"
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "URL to user's avatar image"
         },
         "role": {
-            "type": "string",
-            "description": "User role in the application",
-            "enum": ["admin", "user", "moderator"]
-            "default": "user"
+          "type": "string",
+          "description": "User role in the application",
+          "enum": ["admin", "user", "moderator"],
+          "default": "user"
         },
         "preferences": {
-            "type": "object",
-            "description": "User preferences",
-            "properties": {
-                "theme": {
-                    "type": "string",
-                    "enum": ["default", "light", "dark"],
-                    "default": "default",
-                },
-                "notifications": {
-                    "type": "boolean",
-                    "default": true,
-                }
+          "type": "object",
+          "description": "User preferences",
+          "properties": {
+            "theme": {
+              "type": "string",
+              "enum": ["default", "light", "dark"],
+              "default": "default"
+            },
+            "notifications": {
+              "type": "boolean",
+              "default": true
             },
             "autosave": {
-                "type": "boolean",
-                "default": true,
-            },
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastLogin": {
+          "type": ["string", "null"],
+          "format": "date-time"
         }
       },
-      "createdAt": {
-        "type": "string",
-        "format": "date-time",
-      },
-      "lastLogin": {
-        "type": ["string", "null"],
-        "format": "date-time",
-      }
-    },
-    "required": ["id", "cognitoId", "name", "email", "role"]
+      "required": ["id", "cognitoId", "name", "email", "role"]
     },
     "stories": {
       "type": "array",
@@ -101,113 +101,147 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "description": "Unique story identifier"
-          },
-          "title": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 200,
-            "description": "Title of the story"
-          },
-          "description": {
-            "type": ["string", "null"],
-            "maxLength": 1000,
-            "description": "Story description"
-          },
-          "status": {
-            "type": "string",
-            "enum": ["draft", "published", "archived", "private"],
-            "default": "draft",
-          },
-          "visibility": {
-            "type": "string",
-            "enum": ["public", "private", "shared"],
-            "default": "private",
-          },
-          "thumbnail": {
-            "type": ["string", "null"],
-            "format": "uri",
-            "description": "URL to story thumbnail image"
-          },
-          "chapterCount": {
-            "type": "integer",
-            "minimum": 0,
-            "description": "Number of chapters in the story"
-          },
-          "momentsCount": {
-            "type": "integer",
-            "minimum": 0,
-            "description": "Number of moments in the story"
-          },
-          "authorId": {
-            "type": "string",
-            "description": "ID of the user who created the story"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-          },
-          "updatedAt": {
-            "type": ["string", "null"],
-            "format": "date-time",
-          },
-          "publishedAt": {
-            "type": ["string", "null"],
-            "format": "date-time",
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
+             "type": "string" 
             },
-            "description": "List of tags associated with the story"
-          }
+          "title": { 
+            "type": "string", 
+            "minLength": 1, 
+            "maxLength": 200 
+        },
+          "description": { 
+            "type": ["string", "null"], 
+            "maxLength": 1000 
+        },
+          "status": { 
+            "type": "string", 
+            "enum": ["draft", "published", "archived", "private"], 
+            "default": "draft" 
+        },
+          "visibility": { 
+            "type": "string", 
+            "enum": ["public", "private", "shared"], 
+            "default": "private" 
+        },
+          "thumbnail": {
+             "type": ["string", "null"], 
+             "format": "uri" 
+            },
+          "chapterCount": { 
+            "type": "integer", 
+            "minimum": 0 
+        },
+          "momentCount": { 
+            "type": "integer", 
+            "minimum": 0 
+        },
+          "authorId": { 
+            "type": "string" 
+        },
+          "createdAt": { 
+            "type": "string", 
+            "format": "date-time" 
+        },
+          "updatedAt": { 
+            "type": ["string", "null"], 
+            "format": "date-time" 
+        },
+          "publishedAt": { 
+            "type": ["string", "null"], 
+            "format": "date-time" 
+        },
+          "tags": { 
+            "type": "array", 
+            "items": { 
+                "type": "string"
+                }
+            } 
         },
         "required": ["id", "title", "authorId", "createdAt", "status"]
       }
     },
-    "required": ["id", "userId", "title", "status", "chapterCount", "momentCount", "createdAt", "updatedAt"]
-    }
-},
-"chapters": {
-  "type": "array",
-  "description": "List of chapters within a story",
-  "items": {
-    "type": "object",
-    "properties": {
-      "id": {
-        "type": "string",
-        "description": "Unique chapter identifier"
-      },
-      "storyId": {
-        "type": "string",
-      },
-      "title": {
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 200,
-        "description": "Title of the chapter"
-      },
-      "description": {
-        "type": ["string", "null"],
-        "maxLength": 1000,
-        "description": "Chapter description"
-      },
-      "order": {
-        "type": "integer",
-        "minimum": 1,
-        "description": "Order of the chapter within the story"
-      },
-      "createdAt": {
-        "type": "string",
-        "format": "date-time",
-      },
-      "updatedAt": {
-        "type": ["string", "null"],
-        "format": "date-time",
+    "chapters": {
+      "type": "array",
+      "description": "List of chapters within a story",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { 
+            "type": "string" 
+        },
+          "storyId": { 
+            "type": "string" 
+        },
+          "title": { 
+            "type": "string", 
+            "minLength": 1, 
+            "maxLength": 200 
+        },
+          "description": { 
+            "type": ["string", "null"], 
+            "maxLength": 1000 
+        },
+          "status": { 
+            "type": "string", 
+            "enum": ["draft", "published", "archived"], "default": "draft" 
+        },
+          "order": { 
+            "type": "integer", 
+            "minimum": 1 
+        },
+          "createdAt": { 
+            "type": "string", 
+            "format": "date-time" 
+        },
+          "updatedAt": { 
+            "type": ["string", "null"], 
+            "format": "date-time" 
+        }
+        },
+        "required": ["id", "storyId", "title", "order", "createdAt"]
       }
     },
-    "required": ["id", "storyId", "title", "order", "createdAt"]
-  }
-},
+    "moments": {
+      "type": "array",
+      "description": "List of moments within a chapter",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { 
+            "type": "string" 
+        },
+          "chapterId": { 
+            "type": "string" 
+        },
+          "storyId": { 
+            "type": "string"
+        },
+          "type": { 
+            "type": "string", 
+            "enum": ["text", "image", "video", "audio", "voice_recording", "choice"] 
+        },
+          "title": { "type": ["string", "null"], 
+          "maxLength": 200 
+        },
+          "description": { 
+            "type": ["string", "null"], 
+            "maxLength": 1000 
+        },
+          "content": { 
+            "type": "string", 
+            "maxLength": 1000 
+        },
+          "createdAt": { 
+            "type": "string", 
+            "format": "date-time" 
+        },
+          "updatedAt": { 
+            "type": ["string", "null"], 
+            "format": "date-time" 
+        }
+        },
+        "required": ["id", "chapterId", "content", "createdAt"]
+      }
+    }
+  },
+  "required": ["application", "user", "stories", "chapters", "moments"]
+}
