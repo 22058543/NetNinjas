@@ -1,0 +1,10 @@
+DynamoDB Research
+
+Dynammo is a NoSQL database that stores data in a flexible format
+
+Data is stored in tables similar to relational databases that stores multiple entity types. It organises data by using partition keys (PK), sort keys (SK) and also global secondary indexes (GSI)
+
+DynamoDB is more similar to JSON documents.
+Each item can have multiple attributes which is useful for the application as you can add new attributes to items whithout altering the entire table - it also allows you to store related data together.
+
+Not all items need to have the same attributes
