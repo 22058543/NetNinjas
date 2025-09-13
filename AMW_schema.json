@@ -202,7 +202,7 @@
     },
     "moments": {
       "type": "array",
-      "description": "List of moments within a chapter",
+      "description": "List of moments in a chapter",
       "items": {
         "type": "object",
         "properties": {
@@ -217,7 +217,7 @@
         },
           "type": { 
             "type": "string", 
-            "enum": ["text", "image", "video", "audio", "voice_recording", "choice"] 
+            "enum": ["text", "image", "video", "audio"] 
         },
           "title": { "type": ["string", "null"], 
           "maxLength": 200 
@@ -237,10 +237,39 @@
           "updatedAt": { 
             "type": ["string", "null"], 
             "format": "date-time" 
+        },
+        "media": {
+          "type": ["object", "null"],
+            "properties": {
+              "url": { 
+                "type": "string", 
+                "format": "uri" 
+                },
+                "thumbnail": { 
+                    "type": ["string", "null"], 
+                    "format": "uri"
+                },
+                "fileName": {
+                    "type": "string"
+                },
+                "fileSize": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "duration": {
+                    "type": ["integer", "null"],
+                    "minimum": 0
+                }
+                }
+               },
+                "required": ["url"]
+        },
+        "attribution": {
+            "type": ["string", "null"],
+            "maxLength": 300
         }
         },
         "required": ["id", "chapterId", "content", "createdAt"]
-      }
     }
   },
   "required": ["application", "user", "stories", "chapters", "moments"]
