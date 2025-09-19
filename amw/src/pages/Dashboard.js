@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import StoryCard from '../components/StoryCard.js';
-import './Dashboard.css';
+import '../styles/Dashboard.css';
 
 function Dashboard() {
   const [stories, setStories] = useState([]);
