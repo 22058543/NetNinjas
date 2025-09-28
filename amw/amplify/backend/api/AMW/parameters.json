@@ -1,0 +1,13 @@
+{
+  "AppSyncApiName": "AMW",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authAMW",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "CreateAPIKey": 0,
+  "AuthModeLastUpdated": "2025-09-27T09:41:16.021Z"
+}

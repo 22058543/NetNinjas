@@ -1,0 +1,201 @@
+{
+  "analytics": {
+    "amw": {
+      "providerPlugin": "awscloudformation",
+      "service": "Pinpoint"
+    }
+  },
+  "api": {
+    "AMW": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "AMW"
+        }
+      ],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "apiKeyConfig": {
+                "apiKeyExpirationDate": "2025-10-04T09:41:07.311Z",
+                "apiKeyExpirationDays": 7,
+                "description": "default public key"
+              },
+              "authenticationType": "API_KEY"
+            },
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authAMW"
+            }
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    },
+    "test": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amwd8146aed"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "auth": {
+    "AMW": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS",
+            "REQUIRES_UPPERCASE"
+          ],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "AMWSignUpPostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "DeleteUserData": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "SendEmail": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "StorageStatistics": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "amwd8146aed": {
+      "build": false,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_AMWSignUpPostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AMWSignUpPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_AMWSignUpPostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AMWSignUpPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_DeleteUserData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "DeleteUserData"
+        }
+      ]
+    },
+    "AMPLIFY_function_DeleteUserData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "DeleteUserData"
+        }
+      ]
+    },
+    "AMPLIFY_function_SendEmail_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "SendEmail"
+        }
+      ]
+    },
+    "AMPLIFY_function_SendEmail_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "SendEmail"
+        }
+      ]
+    },
+    "AMPLIFY_function_SendEmail_sesEmail": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "SendEmail"
+        }
+      ]
+    },
+    "AMPLIFY_function_StorageStatistics_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "StorageStatistics"
+        }
+      ]
+    },
+    "AMPLIFY_function_StorageStatistics_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "StorageStatistics"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "AMWs35e3d432e": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
+  }
+}

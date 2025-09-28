@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "paths": {
+    "/stories": {
+      "name": "/stories",
+      "lambdaFunction": "amwd8146aed",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "read"
+        ]
+      }
+    }
+  }
+}

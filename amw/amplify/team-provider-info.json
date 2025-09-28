@@ -1,0 +1,44 @@
+{
+  "devweb": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amw-devweb-3f402-authRole",
+      "UnauthRoleArn": "arn:aws:iam::023464933984:role/amplify-amw-devweb-3f402-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::023464933984:role/amplify-amw-devweb-3f402-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-amw-devweb-3f402-deployment",
+      "UnauthRoleName": "amplify-amw-devweb-3f402-unauthRole",
+      "StackName": "amplify-amw-devweb-3f402",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:023464933984:stack/amplify-amw-devweb-3f402/fbf4cab0-6ee7-11f0-a951-0208df6decf5",
+      "AmplifyAppId": "d3l7ixlo31if2x",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-amw-devweb-3f402-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "function": {
+        "SendEmail": {
+          "sesEmail": "info@amomentwith.com",
+          "deploymentBucketName": "amplify-amw-devweb-3f402-deployment",
+          "s3Key": "amplify-builds/SendEmail-346d6250677a7775586f-build.zip"
+        },
+        "AMWSignUpPostConfirmation": {
+          "deploymentBucketName": "amplify-amw-devweb-3f402-deployment",
+          "s3Key": "amplify-builds/AMWSignUpPostConfirmation-6d457073782f626f6453-build.zip"
+        },
+        "DeleteUserData": {
+          "deploymentBucketName": "amplify-amw-devweb-3f402-deployment",
+          "s3Key": "amplify-builds/DeleteUserData-692b716d6330506c3934-build.zip"
+        },
+        "StorageStatistics": {
+          "deploymentBucketName": "amplify-amw-devweb-3f402-deployment",
+          "s3Key": "amplify-builds/StorageStatistics-733949395276415a4e34-build.zip"
+        },
+        "amwd8146aed": {}
+      },
+      "auth": {
+        "AMW": {}
+      },
+      "storage": {
+        "AMWs35e3d432e": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "resourceName": "AMWs35e3d432e",
+  "policyUUID": "5e3d432e",
+  "bucketName": "amw-media-bucket",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
