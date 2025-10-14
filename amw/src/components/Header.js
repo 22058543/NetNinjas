@@ -13,7 +13,7 @@ const Header = () => {
                 {/* Logo and Title */}
                 <Link to="/" className="header-logo-section">
                     <img src={logo} alt="A Moment With Logo" className="header-logo" />
-                    <span className="header-title">A Moment With</span>
+                    <span className="header-title">a moment with</span>
                 </Link>
 
                 {/* Navigation */}

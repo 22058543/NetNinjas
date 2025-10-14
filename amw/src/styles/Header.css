@@ -1,3 +1,6 @@
+/* Import ITC Avant Garde Gothic Pro Font */
+@import url('https://fonts.cdnfonts.com/css/itc-avant-garde-gothic-pro');
+
 /* Header Styles */
 .app-header {
   background: linear-gradient(135deg, #3d1a52 0%, #2a0f3d 100%);
@@ -5,6 +8,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  font-family: 'ITC Avant Garde Gothic Pro', 'Avant Garde', 'Century Gothic', sans-serif;
 }
 
 .header-container {
@@ -39,6 +43,7 @@
   font-weight: 600;
   color: white;
   letter-spacing: 0.5px;
+  font-family: 'ITC Avant Garde Gothic Pro', 'Avant Garde', 'Century Gothic', sans-serif;
 }
 
 /* Navigation */
@@ -56,6 +61,7 @@
   padding: 8px 16px;
   border-radius: 6px;
   transition: all 0.2s ease;
+  font-family: 'ITC Avant Garde Gothic Pro', 'Avant Garde', 'Century Gothic', sans-serif;
 }
 
 .nav-link:hover {
@@ -80,6 +86,7 @@
   font-size: 0.9rem;
   transition: all 0.2s ease;
   box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+  font-family: 'ITC Avant Garde Gothic Pro', 'Avant Garde', 'Century Gothic', sans-serif;
 }
 
 .sign-out-button:hover {
@@ -106,6 +113,7 @@
   color: white;
   width: 100%;
   font-size: 0.9rem;
+  font-family: 'ITC Avant Garde Gothic Pro', 'Avant Garde', 'Century Gothic', sans-serif;
 }
 
 .header-search input::placeholder {
@@ -141,6 +149,7 @@
   justify-content: center;
   font-weight: 600;
   font-size: 0.9rem;
+  font-family: 'ITC Avant Garde Gothic Pro', 'Avant Garde', 'Century Gothic', sans-serif;
 }
 
 /* Responsive Design */
