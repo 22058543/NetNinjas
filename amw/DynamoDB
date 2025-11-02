@@ -1,1 +1,262 @@
+DynamoDB Schema (Finalised Design)
+As a developer, I want to finalise the DynamoDB schema for storing user, story, chapter, and media
+ data to ensure scalability and a consistent data flow with the mobile app.
+ the tables, primary keys, and indexes to  use to store:
+Users
+
+
+Stories
+
+
+Chapters
+
+
+Media (file metadata pointing to S3)
+We finalised a multi-table DynamoDB design to persist users, stories, chapters and media metadata. Keys and Global Secondary Indexes (GSIs) are aligned to the actual access patterns of the mobile app (list stories by user, fetch ordered chapters, list media by story). We selected on-demand (PAY_PER_REQUEST) capacity for simplicity and cost predictability.
+Tables: Users, Stories, Chapters, Media
+
+
+Indices: UserStoriesIndex, ChapterOrderIndex, StoryMediaIndex
+
+
+Media files are stored in S3; only metadata (file key, size, type, links) lives in DynamoDB.
+2. Data Model (ER Diagram)
+erDiagram
+  USERS {
+    string userId PK
+    string email
+    string displayName
+    string createdAt
+  }
+
+  STORIES {
+    string storyId PK
+    string userId
+    string title
+    string summary
+    string status
+    string createdAt
+    string updatedAt
+  }
+  CHAPTERS {
+    string storyId PK
+    string chapterId SK
+    int order
+    string content
+    string updatedAt
+  }
+
+  MEDIA {
+    string mediaId PK
+    string userId
+    string storyId
+    string chapterId
+    string fileKey
+    string mimeType
+    int size
+    string createdAt
+  }
+
+  USERS ||--o{ STORIES : has
+  STORIES ||--o{ CHAPTERS : has
+  STORIES ||--o{ MEDIA : has
+3. Tables & Indexes
+3.1 Users
+PK: userId (String)
+
+
+Attributes: email, displayName, createdAt
+
+
+Rationale: Simple lookup by userId; no secondary index needed.
+
+
+3.2 Stories
+PK: storyId (String)
+
+
+GSI – UserStoriesIndex:
+
+
+PK: userId (String)
+
+
+SK: createdAt (String)
+
+
+Use: List all stories for a user, newest first.
+
+
+Attributes: userId, title, summary, status, createdAt, updatedAt
+
+
+Rationale: Stories are fetched both directly (storyId) and by owner (userId).
+
+
+3.3 Chapters
+PK: storyId (String)
+
+
+SK: chapterId (String)
+
+
+GSI – ChapterOrderIndex:
+
+
+PK: storyId (String)
+
+
+SK: order (Number)
+
+
+Use: Retrieve a story’s chapters in reading order.
+
+
+Attributes: order, content, updatedAt
+
+
+Rationale: Composite key groups chapters under a story; GSI returns them ordered.
+3.4 Media
+PK: mediaId (String)
+
+
+GSI – StoryMediaIndex:
+
+
+PK: storyId (String)
+
+
+SK: createdAt (String)
+
+
+Use: List a story’s media items, newest first.
+
+
+Attributes: userId, chapterId?, fileKey (S3), mimeType, size, createdAt
+
+
+Rationale: Files live in S3; DynamoDB tracks metadata and relationships.
+
+
+4. Access Patterns (App → API → DB)
+Get user: Users[userId]
+
+
+Get story: Stories[storyId]
+
+
+List stories by user (newest): Query Stories.UserStoriesIndex where userId = :uid ORDER BY createdAt DESC
+
+
+List chapters by story (ordered): Query Chapters.ChapterOrderIndex where storyId = :sid ORDER BY order ASC
+
+
+List media by story (newest): Query Media.StoryMediaIndex where storyId = :sid ORDER BY createdAt DESC
+
+
+These patterns map directly to GraphQL operations used by the mobile app:
+listStoriesByUser(userId), listChapters(storyId), listMedia(storyId), plus getStory, getUser.
+
+5. Scalability & Consistency Notes
+GSIs are used whenever the query partition key differs from the table’s base key (e.g., list by userId).
+
+
+Hot partitioning is unlikely: userId distribution is wide; createdAt/order give good sort distribution.
+
+
+On-demand capacity simplifies scaling and avoids capacity planning.
+
+
+Eventual consistency is acceptable for listing operations; reads can be tuned per query if needed.
+6. Provisioning Artifacts (Create-Table JSON)
+(These definitions allow straightforward provisioning via Console, CLI, or IaC.)
+Users
+{
+  "TableName": "Users",
+  "AttributeDefinitions": [{ "AttributeName": "userId", "AttributeType": "S" }],
+  "KeySchema": [{ "AttributeName": "userId", "KeyType": "HASH" }],
+  "BillingMode": "PAY_PER_REQUEST"
+}
+
+Stories
+{
+  "TableName": "Stories",
+  "AttributeDefinitions": [
+    { "AttributeName": "storyId", "AttributeType": "S" },
+    { "AttributeName": "userId", "AttributeType": "S" },
+    { "AttributeName": "createdAt", "AttributeType": "S" }
+  ],
+  "KeySchema": [{ "AttributeName": "storyId", "KeyType": "HASH" }],
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "UserStoriesIndex",
+      "KeySchema": [
+        { "AttributeName": "userId", "KeyType": "HASH" },
+        { "AttributeName": "createdAt", "KeyType": "RANGE" }
+      ],
+      "Projection": { "ProjectionType": "ALL" }
+    }
+  ],
+  "BillingMode": "PAY_PER_REQUEST"
+}
+
+Chapters 
+{
+  "TableName": "Chapters",
+  "AttributeDefinitions": [
+    { "AttributeName": "storyId", "AttributeType": "S" },
+    { "AttributeName": "chapterId", "AttributeType": "S" },
+    { "AttributeName": "order", "AttributeType": "N" }
+  ],
+  "KeySchema": [
+    { "AttributeName": "storyId", "KeyType": "HASH" },
+    { "AttributeName": "chapterId", "KeyType": "RANGE" }
+  ],
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "ChapterOrderIndex",
+      "KeySchema": [
+        { "AttributeName": "storyId", "KeyType": "HASH" },
+        { "AttributeName": "order", "KeyType": "RANGE" }
+      ],
+      "Projection": { "ProjectionType": "ALL" }
+    }
+  ],
+  "BillingMode": "PAY_PER_REQUEST"
+}
+
+Media
+{
+  "TableName": "Media",
+  "AttributeDefinitions": [
+    { "AttributeName": "mediaId", "AttributeType": "S" },
+    { "AttributeName": "storyId", "AttributeType": "S" },
+    { "AttributeName": "createdAt", "AttributeType": "S" }
+  ],
+  "KeySchema": [{ "AttributeName": "mediaId", "KeyType": "HASH" }],
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "StoryMediaIndex",
+      "KeySchema": [
+        { "AttributeName": "storyId", "KeyType": "HASH" },
+        { "AttributeName": "createdAt", "KeyType": "RANGE" }
+      ],
+      "Projection": { "ProjectionType": "ALL" }
+    }
+  ],
+  "BillingMode": "PAY_PER_REQUEST"
+}
+
+7. Integration with Mobile App (GraphQL)
+Mutations: createUser, createStory, createChapter, saveMedia
+
+
+Queries: getUser, getStory, listStoriesByUser, listChapters, listMedia
+ GraphQL resolvers call DynamoDB using the keys and GSIs defined above; media files are uploaded to S3, with metadata persisted in Media.
+
+
+8. Note on AWS Permissions (IAM)
+Actual table creation in AWS was not performed due to IAM restrictions on the student account (dynamodb:CreateTable not permitted). The schema, indices, and create-table JSON are provided to enable straightforward provisioning by an administrator or via Infrastructure-as-Code.
+
+
 
