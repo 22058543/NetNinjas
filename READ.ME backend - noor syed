@@ -1,0 +1,25 @@
+DynamoDB CRUD Implemented
+
+I implemented CRUD support for the AMW backend using AWS DynamoDB and the AWS SDK v3.
+Functions implemented for User, Story, Chapter, and Media tables:
+
+Create
+
+Read by ID
+
+Query by GSI (e.g., stories by user, chapters by story, media by parent)
+
+Delete (media example)
+
+These functions connect to the Amplify-created tables in AWS & match the project schema.
+
+
+### GraphQL API & Code Generation Setup
+
+- Added GraphQL schema (`schema.json`)
+- Added GraphQL operations (`queries.graphql`, `mutations.graphql`)
+- Configured GraphQL Code Generator (`backend/codegen.yml`)
+- Setup output file (`types.ts`) to receive generated types
+- This enables strong typing between the backend and GraphQL API
+
+> Codegen will run in CI or local pipeline once full backend access is available.
