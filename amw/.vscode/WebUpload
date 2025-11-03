@@ -1,0 +1,107 @@
+// Configure Amplify Storage
+import { Amplify, Storage } from 'aws-amplify';
+
+// Define TypeScript interfaces
+interface UploadProgress {
+    loaded: number;
+    total: number;
+}
+
+interface StorageConfig {
+    bucket: string;
+    region: string;
+    level: 'private' | 'public' | 'protected';
+    identityPoolId: string;
+    maxSize: number;
+    acceptedFileTypes: string[];
+}
+
+// Initialize Amplify Storage
+const storageConfig: StorageConfig = {
+    bucket: 'a-moment-with-storage',
+    region: 'us-east-1',
+    level: 'private',
+    identityPoolId: 'YOUR_IDENTITY_POOL_ID',
+    maxSize: 2000 * 1024 * 1024, // 2GB file size limit
+    acceptedFileTypes: ['image/*', 'video/*']
+};
+
+Amplify.configure({
+    Storage: storageConfig,
+    Auth: {
+        identityPoolId: storageConfig.identityPoolId,
+        region: storageConfig.region
+    }
+});
+
+// Validation functions
+const validateFileSize = (file: File): boolean => {
+    return file.size <= storageConfig.maxSize;
+};
+
+const validateFileType = (file: File): boolean => {
+    return storageConfig.acceptedFileTypes.some(type => {
+        const [category, extension] = type.split('/');
+        return extension === '*' 
+            ? file.type.startsWith(category)
+            : file.type === type;
+    });
+};
+
+// Enhanced upload function with validation
+export const uploadFile = async (file: File, groupId: string): Promise<string> => {
+    if (!file || !groupId) {
+        throw new Error('File and groupId are required');
+    }
+
+    // Validate file size
+    if (!validateFileSize(file)) {
+        throw new Error(`File size exceeds maximum limit of ${storageConfig.maxSize / (1024 * 1024)}MB`);
+    }
+
+    // Validate file type
+    if (!validateFileType(file)) {
+        throw new Error('File type not supported');
+    }
+
+    try {
+        const key = `${groupId}/${file.name}`;
+        const result = await Storage.put(key, file, {
+            contentType: file.type,
+            metadata: {
+                groupId,
+                fileName: file.name,
+                fileSize: file.size,
+                fileType: file.type,
+                uploadDate: new Date().toISOString()
+            },
+            progressCallback: (progress: UploadProgress) => {
+                const percentCompleted = Math.round((progress.loaded / progress.total) * 100);
+                console.log(`Upload progress: ${percentCompleted}%`);
+            }
+        });
+        return result.key;
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        console.error('Error uploading file:', errorMessage);
+        throw new Error(`Upload failed: ${errorMessage}`);
+    }
+};
+
+export const getFile = async (key: string): Promise<string> => {
+    if (!key) {
+        throw new Error('File key is required');
+    }
+
+    try {
+        const url = await Storage.get(key);
+        if (!url) {
+            throw new Error('File not found');
+        }
+        return url;
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        console.error('Error retrieving file:', errorMessage);
+        throw new Error(`File retrieval failed: ${errorMessage}`);
+    }
+};
