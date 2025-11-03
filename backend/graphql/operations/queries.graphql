@@ -1,0 +1,30 @@
+
+# Users
+query GetUser($id: ID!) {
+  getUser(id: $id) { id email displayName createdAt }
+}
+
+# Stories
+query GetStory($id: ID!) {
+  getStory(id: $id) { id userId title createdAt visibility status }
+}
+
+query ListStoriesByUser($userId: ID!) {
+  listStoriesByUser(userId: $userId) {
+    id userId title createdAt visibility status
+  }
+}
+
+# Chapters
+query ListChaptersByStory($storyId: ID!) {
+  listChaptersByStory(storyId: $storyId) {
+    id storyId order title createdAt
+  }
+}
+
+# Media
+query ListMediaForParent($parentId: ID!) {
+  listMediaForParent(parentId: $parentId) {
+    id parentId s3Key contentType createdAt
+  }
+}
