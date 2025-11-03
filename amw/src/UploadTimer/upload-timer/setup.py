@@ -1,5 +1,3 @@
-Sure, here's the contents for the file: /upload-timer/setup.py
-
 from setuptools import setup, find_packages
 
 setup(
