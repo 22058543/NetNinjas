@@ -1,0 +1,90 @@
+import React, { useState, useEffect } from 'react';
+import { Storage } from 'aws-amplify';
+import { S3Client, ListObjectsCommand } from '@aws-sdk/client-s3';
+
+interface MediaFile {
+    key: string;
+    url: string;
+    type: 'video' | 'image';
+    lastModified?: Date;
+}
+
+interface S3MediaDisplayProps {
+    const fetchMediaFiles = async () => {
+        try {
+            if (!allowedUsers.includes(userRole)) {
+                throw new Error('Unauthorized access');
+            }
+            const s3Files = await Storage.list('');
+            
+            const mediaItems = await Promise.all(
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetchMediaFiles();
+    }, []);
+
+    const fetchMediaFiles = async () => {
+        try {
+            const s3Files = await Storage.list('');
+            const authorized = allowedUsers.includes(userRole);
+            
+            const mediaItems = await Promise.all(
+                s3Files.map(async (file) => {
+                    const url = await Storage.get(file.key);
+                    return {
+                        key: file.key,
+                        url,
+                        type: file.key.toLowerCase().endsWith('.mp4') ? 'video' : 'image',
+                        lastModified: file.lastModified,
+                    };
+                })
+            );
+
+            setMediaFiles(mediaItems);
+        } catch (error) {
+            console.error('Error fetching media files:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleDelete = async (key) => {
+        try {
+            await Storage.remove(key);
+            await fetchMediaFiles();
+        } catch (error) {
+            console.error('Error deleting file:', error);
+        }
+    };
+
+    if (loading) {
+        return <div>Loading media...</div>;
+    }
+
+    return (
+        <div className="media-grid">
+            {mediaFiles.map((media) => (
+                <div key={media.key} className="media-item">
+                    {media.type === 'video' ? (
+                        <video controls src={media.url} width="300" />
+                    ) : (
+                        <img src={media.url} alt={media.key} width="300" />
+                    )}
+                    <div className="media-controls">
+                        <p>{media.key}</p>
+                        {allowedUsers.includes(userRole) && (
+                            <button onClick={() => handleDelete(media.key)}>Delete</button>
+                        )}
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};
+
+export default S3MediaDisplay;
+
+function handleDelete(key: any) {
+    throw new Error('Function not implemented.');
+}
