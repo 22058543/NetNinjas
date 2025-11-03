@@ -1,0 +1,19 @@
+mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) { id email displayName createdAt }
+}
+
+mutation CreateStory($input: CreateStoryInput!) {
+  createStory(input: $input) { id userId title createdAt visibility status }
+}
+
+mutation CreateChapter($input: CreateChapterInput!) {
+  createChapter(input: $input) { id storyId order title createdAt }
+}
+
+mutation CreateMedia($input: CreateMediaInput!) {
+  createMedia(input: $input) { id parentId s3Key contentType createdAt }
+}
+
+mutation DeleteMedia($id: ID!) {
+  deleteMedia(id: $id) { id }
+}
