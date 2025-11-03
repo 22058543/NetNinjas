@@ -1,0 +1,3 @@
+subscription OnCreateStory($userId: ID!) {
+  onCreateStory(userId: $userId) { id userId title createdAt visibility status }
+}
